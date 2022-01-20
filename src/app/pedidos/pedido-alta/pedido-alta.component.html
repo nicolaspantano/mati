@@ -1,0 +1,98 @@
+<div class="row g-5">
+  <div class="col-md-5 col-lg-4 order-md-last">
+    <h4 class="d-flex justify-content-between align-items-center mb-3">
+      <span class="text-primary">Zonas</span>
+      <span class="badge bg-primary rounded-pill"></span>
+    </h4>
+    <ul class="list-group mb-3">
+      <li class="list-group-item d-flex justify-content-between lh-sm" *ngFor="let zona of zonas" name="zonas"
+        (click)="elegirZona(zona)" [id]="zona.nombre">
+        <div>
+          <h6 class="my-0">{{zona.nombre}}</h6>
+          <small class="text-muted">&nbsp;</small>
+        </div>
+      </li>
+    </ul>
+
+    <h4 class="d-flex justify-content-between align-items-center mb-3">
+      <span class="text-primary">Precio</span>
+      <span class="badge bg-primary rounded-pill"></span>
+    </h4>
+
+    <input type="text" class="form-control" id="precio" [(ngModel)]="pedido.precio" placeholder="" value="" required>
+
+  </div>
+
+
+
+
+
+
+  <div class="col-md-7 col-lg-8">
+    <h4 class="mb-3">Nuevo pedido</h4>
+
+    <div class="row g-3">
+      <div class="col-sm-6">
+        <label for="firstName" class="form-label">Cliente</label>
+        <input type="text" class="form-control" id="firstName" [(ngModel)]="pedido.cliente" placeholder="" value=""
+          required>
+        <div class="invalid-feedback">
+          Valid first name is required.
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <label for="lastName" class="form-label">Direccion</label>
+        <input type="text" class="form-control" [(ngModel)]="pedido.direccion" id="lastName" placeholder="" value=""
+          required>
+        <div class="invalid-feedback">
+          Valid last name is required.
+        </div>
+      </div>
+
+      
+      
+
+      <div class="col-1">
+        
+      
+        <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"><i
+            class="fa fa-calendar"></i></button>
+      </div>
+      <div class="col-5">
+        <label for="address" class="form-label">Fecha de entrega</label>
+        <input style="display:none" class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model" id="adress" ngbDatepicker
+          #d="ngbDatepicker" (dateSelect)="changeCalendar()"><input class="form-control" id="textoModel" type="text" disabled [value]=pedido.fechaEntrega>
+
+      </div>
+
+      <div class="col-6">
+        <label for="comentarioPedido" class="form-label">Comentario</label>
+        <input type="text" class="form-control" [(ngModel)]="pedido.comentario" id="comentarioPedido" placeholder="Comentario"
+          required>
+      </div>
+
+
+      <hr class="my-4">
+
+      <div style="margin-bottom: 20px;">
+        <h4>Productos</h4>
+        <div *ngFor="let e of productosElegidos; let i = index" class="row" style="margin-bottom: 10px;">
+
+
+          <div class="col-auto"><input type="text" [(ngModel)]="e.cantidad" placeholder="Cantidad"></div>
+          <div *ngIf="!e.medida" class="col-auto"><button class="btn btn-primary btn-small"
+              (click)="agregarUnidadDeMedida(e)">+</button></div>
+          <div *ngIf="e.medida" class="col-auto">{{e.medida}}</div>
+          <div class="col-auto">{{e.nombre}}</div>
+          <div class="col-auto"><input type="text" [(ngModel)]="e.comentario" placeholder="Comentario"></div>
+          <div class="col-auto"><button class="btn btn-danger" (click)="eliminarProd(i)">X</button></div>
+
+        </div>
+        <button class="btn btn-primary" (click)="agregarProducto()">+</button>
+      </div>
+
+      <button class="w-100 btn btn-primary btn-lg" (click)="agregarPedido()">{{mensajeBoton}}</button>
+
+    </div>
+  </div>

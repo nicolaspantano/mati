@@ -1,0 +1,79 @@
+<div class="container">
+  <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+      <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+      <span class="fs-4">Matias</span>
+    </a>
+
+    <ul class="nav nav-pills">
+
+      <li class="nav-item dropdown">
+        <a routerLink="hoja-produccion" class="nav-link" id="dropdown01" data-bs-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">Hoja de produccion</a>
+
+    </li>
+
+
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" id="dropdown01" data-bs-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">Clientes</a>
+    <ul class="dropdown-menu" aria-labelledby="dropdown01">
+        <li> <a routerLink="/carteles" class="dropdown-item" id="dropdown01" data-bs-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">Carteles</a>
+        </li>
+        
+        <li> <a class="dropdown-item" routerLink="/tabla-clientes">Tabla de clientes</a>
+        </li>
+
+    </ul>
+</li>  
+
+
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="dropdown01" data-bs-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">Pedidos</a>
+        <ul class="dropdown-menu" aria-labelledby="dropdown01">
+            <li> <a class="dropdown-item" routerLink="/pedidos-alta">Nuevo pedido</a>
+            </li>
+            
+            <li> <a class="dropdown-item" routerLink="/pedidos-listado">Todos los pedidos</a>
+            </li>
+
+            <li> <a class="dropdown-item" routerLink="/tabla-pedidos">Tabla de pedidos</a>
+            </li>
+
+        </ul>
+    </li>
+
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" id="dropdown02" data-bs-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">Productos</a>
+      <ul class="dropdown-menu" aria-labelledby="dropdown02">
+          <li> <a class="dropdown-item" routerLink="/productos-alta">Nuevo producto</a>
+          </li>
+          <li> <a class="dropdown-item" routerLink="/nueva-unidad-de-medida">Nueva unidad de medida</a>
+          </li>
+          
+          <li> <a class="dropdown-item" routerLink="/productos-listado">Todos los productos</a>
+          </li>
+
+      </ul>
+  </li>
+
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" id="dropdown03" data-bs-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">Zonas</a>
+    <ul class="dropdown-menu" aria-labelledby="dropdown03">
+        <li> <a class="dropdown-item" routerLink="/zonas-alta">Nueva Zona</a>
+        </li>
+
+    </ul>
+</li>
+
+    </ul>
+    
+  </header>
+<router-outlet></router-outlet>
+
+</div>
