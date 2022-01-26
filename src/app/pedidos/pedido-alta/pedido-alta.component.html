@@ -19,7 +19,7 @@
       <span class="badge bg-primary rounded-pill"></span>
     </h4>
 
-    <input type="text" class="form-control" id="precio" [(ngModel)]="pedido.precio" placeholder="" value="" required>
+    <input type="text" class="form-control" readonly id="precio" [(ngModel)]="pedido.precio" placeholder="" value="">
 
   </div>
 
@@ -75,17 +75,18 @@
 
       <hr class="my-4">
 
-      <div style="margin-bottom: 20px;">
+      <div style="margin-bottom: 20px">
         <h4>Productos</h4>
         <div *ngFor="let e of productosElegidos; let i = index" class="row" style="margin-bottom: 10px;">
 
 
-          <div class="col-auto"><input type="text" [(ngModel)]="e.cantidad" placeholder="Cantidad"></div>
+          <div class="col-2"><input class="form-control" type="text" (change)="actualizarPrecio()" [(ngModel)]="e.cantidad" placeholder="Cantidad"></div>
           <div *ngIf="!e.medida" class="col-auto"><button class="btn btn-primary btn-small"
               (click)="agregarUnidadDeMedida(e)">+</button></div>
           <div *ngIf="e.medida" class="col-auto">{{e.medida}}</div>
           <div class="col-auto">{{e.nombre}}</div>
-          <div class="col-auto"><input type="text" [(ngModel)]="e.comentario" placeholder="Comentario"></div>
+          <div class="col-3"><input class="form-control" type="text" [(ngModel)]="e.comentario" placeholder="Comentario"></div>
+          <div class="col-2"><input class="form-control" name="precio" (change)="actualizarPrecio()" type="number" [(ngModel)]="e.precio" placeholder="Precio"></div>
           <div class="col-auto"><button class="btn btn-danger" (click)="eliminarProd(i)">X</button></div>
 
         </div>

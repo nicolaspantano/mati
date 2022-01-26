@@ -4,6 +4,7 @@ import { ZonasService } from 'src/app/servicios/zonas.service';
 import  dateFormat, { masks }  from 'dateformat';
 import Swal from 'sweetalert2';
 import { HojaProduccionService } from 'src/app/hoja-produccion.service';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-pedidos-listado',
@@ -11,6 +12,12 @@ import { HojaProduccionService } from 'src/app/hoja-produccion.service';
   styleUrls: ['./pedidos-listado.component.css']
 })
 export class PedidosListadoComponent implements OnInit {
+
+
+  model: NgbDateStruct;
+  date;
+  fechaElegida='Elija una fecha para filtrar';
+
 
   zonas;
   pedidos=[];
@@ -54,9 +61,16 @@ export class PedidosListadoComponent implements OnInit {
   cambiarZona(){
     this.pedidosActual = [];
     this.pedidos.forEach(element => {
-      if(this.zonaElegida == element.zona && this.mostrarEntregados == element.estado){
-        this.pedidosActual.push(element);
+      if(this.fechaElegida != 'Elija una fecha para filtrar'){
+        if(this.zonaElegida == element.zona && this.mostrarEntregados == element.estado && element.fechaEntrega == this.fechaElegida){
+          this.pedidosActual.push(element);
+        }
+      }else{
+        if(this.zonaElegida == element.zona && this.mostrarEntregados == element.estado){
+          this.pedidosActual.push(element);
+        }
       }
+      
     });
     this.pedidosActual.sort(function (a,b){
 
@@ -99,21 +113,35 @@ export class PedidosListadoComponent implements OnInit {
       }
       
     });
-    this.pedidosActual.sort(function (a,b){
+    console.log(this.fechaElegida)
+    if(this.fechaElegida != 'Elija una fecha para filtrar'){
+      var pedidosActualAux=[];
+      this.pedidosActual.forEach((element,i) => {
+        if(element.fechaEntrega==this.fechaElegida){
+          pedidosActualAux.push(element);
+        }
+      })
 
-      var fechaUnoStr = a.fechaEntrega.split('/');
-      var fechaUno = new Date(fechaUnoStr[2],fechaUnoStr[1]-1,fechaUnoStr[0]);
+      this.pedidosActual = pedidosActualAux;
 
-      var fechaDosStr = b.fechaEntrega.split('/');
-      var fechaDos = new Date(fechaDosStr[2],fechaDosStr[1]-1,fechaDosStr[0]);
+      console.log('pedidosactual despues de los splice',this.pedidosActual)
+      this.pedidosActual.sort(function (a,b){
 
-      if(fechaUno>fechaDos){
-        return 1;
-      }
-      return -1;
+        var fechaUnoStr = a.fechaEntrega.split('/');
+        var fechaUno = new Date(fechaUnoStr[2],fechaUnoStr[1]-1,fechaUnoStr[0]);
+  
+        var fechaDosStr = b.fechaEntrega.split('/');
+        var fechaDos = new Date(fechaDosStr[2],fechaDosStr[1]-1,fechaDosStr[0]);
+  
+        if(fechaUno>fechaDos){
+          return 1;
+        }
+        return -1;
+  
+        
+      })
+    }
 
-      
-    })
   }
 
   eliminarPedido(id){
@@ -133,5 +161,43 @@ export class PedidosListadoComponent implements OnInit {
       }
     })
   }
+
+  changeCalendar(){
+    /*this.produccionSvc.TraerTodosPorFecha(this.model.day + '/' + this.model.month + '/' + this.model.year).valueChanges().subscribe(res => {
+     this.registros = res;
+    })*/
+    console.log('cambio el calendario');
+    this.fechaElegida = this.model.day + '/' + this.model.month + '/' + this.model.year;
+    this.pedidosActual = [];
+    this.pedidos.forEach(element => {
+
+      if(this.zonaElegida!='default'){
+        if(this.zonaElegida == element.zona && this.mostrarEntregados == element.estado &&element.fechaEntrega == this.fechaElegida){
+          this.pedidosActual.push(element);
+        }
+      }
+      else{
+        if(this.mostrarEntregados == element.estado && element.fechaEntrega == this.fechaElegida){
+          this.pedidosActual.push(element);
+        }
+      }
+      
+    });
+    this.pedidosActual.sort(function (a,b){
+
+      var fechaUnoStr = a.fechaEntrega.split('/');  
+      var fechaUno = new Date(fechaUnoStr[2],fechaUnoStr[1]-1,fechaUnoStr[0]);
+
+      var fechaDosStr = b.fechaEntrega.split('/');
+      var fechaDos = new Date(fechaDosStr[2],fechaDosStr[1]-1,fechaDosStr[0]);
+
+      if(fechaUno>fechaDos){
+        return 1;
+      }
+      return -1;
+
+      
+    })
+    }
 
 }

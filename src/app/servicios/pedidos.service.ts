@@ -9,6 +9,7 @@ export class PedidosService {
   constructor(private firestore:AngularFirestore) { }
 
   AgregarUno(pedido){
+    
     var id = this.firestore.createId();
     pedido.id = id;
     this.firestore.collection('pedidos').doc(id).set({...pedido});

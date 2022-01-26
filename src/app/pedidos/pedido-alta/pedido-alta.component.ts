@@ -210,6 +210,19 @@ export class PedidoAltaComponent implements OnInit {
   eliminarProd(i){
     this.productosElegidos.splice(i,1);
   }
+
+
+  actualizarPrecio(){
+    var suma = 0;
+    this.productosElegidos.forEach((a) => {
+      if(!isNaN(a.precio)&& !isNaN(a.cantidad)){
+        suma += (a.precio * a.cantidad);
+
+      }
+    })
+
+    this.pedido.precio = suma;
+  }
 }
 
 
