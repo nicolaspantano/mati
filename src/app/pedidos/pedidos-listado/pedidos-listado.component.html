@@ -1,6 +1,10 @@
-<div class="row">
-  <div class="col-3">
-    <h5>Zona:</h5> <!--<button (click)="imprimirNoEntregados()">Imprimir</button>-->
+
+<div class="row" style="margin-bottom: 15px;">
+  <div class="col-1">
+    <h5>Zona:</h5> 
+  </div>
+  <div class="col-2">
+    <button class="btn btn-primary" (click)="imprimirPedidos()">Imprimir</button>
   </div>
   <div class="col-4">
     Mostrar pedidos entregados: <input type="checkbox" (change)="cambiarEntregados()">
@@ -34,8 +38,42 @@
 
 
 
-<div class="pedidos" *ngIf="pedidosActual">
-  <div class="row cuadro" *ngFor="let pedido of pedidosActual; let i = index">
+<div id ="pedidos" class="pedidos" *ngIf="pedidosActual">
+  <div class="row cuadro" name="pedido" *ngFor="let pedido of pedidosActual; let i = index">
+    <!--<div *ngIf="pedido.estado==0">-->
+    <div class="col-2"></div>
+    <div class="col-8" style="border:solid; border-color:black; border-width: 4px; padding: 15px;width:70%;margin-top:20px">
+      <div class="row">
+        <div class="col-3">
+          <h4>{{pedido.cliente}}</h4>
+        </div>
+        <div class="col-3">{{pedido.direccion}}</div>
+        <div class="col-3">{{pedido.zona}}</div>
+        <div class="col-3">
+          <!--<button style="float: right; display:none;" *ngIf="pedido.estado==0" class="btn btn-primary"
+            (click)="cambiarEstado(pedido.id,1,i)">Entregar</button>
+          <p style="float: right;"  *ngIf="pedido.estado==1">Entregado</p>-->
+          <strong>{{pedido.fechaEntrega}}</strong>
+        </div>
+
+      </div>
+      <p *ngFor="let prod of pedido.productos">{{prod.cantidad}} {{prod.medida}} {{prod.nombre}} - {{prod.comentario}}
+      </p>
+      <p><strong>Total:</strong> ${{pedido.precio}} <span *ngIf="pedido.comentario" style="margin-left: 20px;">Comentario: {{pedido.comentario}}</span> <span style="float: right;"><button style="display:none;"  [routerLink]="['/pedidos-alta']" [queryParams]="{pedidoInput:pedido | json }" class="btn btn-primary">Editar</button><button class="btn btn-danger" (click)="eliminarPedido(pedido.id)" style="margin-left:15px; display:none;">Eliminar</button></span></p>
+    </div>
+    <div class="col-2">
+      
+    </div>
+  </div>
+
+  <div class="text-center" style="margin-top:40px;" *ngIf="pedidosActual.length==0">
+    <h5>No hay pedidos para mostrar</h5>
+  </div>
+  <!--</div>-->
+</div>
+
+<div id ="pedidosDivididos" class="pedidos" *ngIf="pedidosDivididos">
+  <div class="row cuadro" name="pedidoDividido" *ngFor="let pedido of pedidosDivididos; let i = index">
     <!--<div *ngIf="pedido.estado==0">-->
     <div class="col-2"></div>
     <div class="col-8" style="border:solid; border-color:black; border-width: 4px; padding: 15px;width:70%;margin-top:20px">

@@ -154,7 +154,7 @@ export class PedidoAltaComponent implements OnInit {
       
       var id = this.pedidosSvc.AgregarUno(this.pedido);
       
-      this.clienteSvc.AgregarUno({'cliente' : this.pedido.cliente, 'direccion' : this.pedido.direccion, 'zona' : this.pedido.zona})
+      this.clienteSvc.AgregarUno({'cliente' : this.pedido.cliente, 'direccion' : this.pedido.direccion, 'zona' : this.pedido.zona, 'fecha' : this.pedido.fechaEntrega})
       
       
       this.productosElegidos.forEach(element => {

@@ -9,14 +9,9 @@ export class ClienteService {
   constructor(private firestore:AngularFirestore) { }
 
   AgregarUno(cliente){
-    this.comprobarSiExiste(cliente).subscribe((res)=>{
-      if(res.length==0){
         let id = this.firestore.createId();
         cliente.id=id;
         this.firestore.collection('clientes').doc(id).set({...cliente});
-
-      }
-    })
   }
 
   TraerTodos(){
