@@ -223,9 +223,7 @@ export class PedidosListadoComponent implements OnInit {
       while(pedidosAux.length>0){
         this.hacerCanva(pedidosAux);
       }
-
-      
-
+      document.getElementById('pedidosDivididos').style.display='none';
       
     })
 
@@ -268,7 +266,7 @@ export class PedidosListadoComponent implements OnInit {
             _callback();
           }
           else{
-            document.getElementById('pedidosDivididos').style.display='none';
+            console.log('entra aca');
           }
         })
       });

@@ -52,7 +52,7 @@ export class HojaproduccionComponent implements OnInit {
 
     }).then((docResult)=>{
       console.log(docResult,'docresult')
-      docResult.save(`pedidos.pdf`);
+      docResult.save(`hojaproduccion.pdf`);
       tabla.style.fontSize = tamañoOriginal;
     
   });
