@@ -237,6 +237,8 @@ export class PedidosListadoComponent implements OnInit {
 
       this.pedidosDivididos = pedidosAux.splice(0,5);
       var pedidos = document.getElementById('pedidosDivididos');
+      var tamañoOriginal = pedidos.style.fontSize;
+      pedidos.style.fontSize = "30px";
       setTimeout(() => {
       console.log('element',pedidos)
       var respuesta = new Promise((resolve,reject) => {
@@ -260,6 +262,8 @@ export class PedidosListadoComponent implements OnInit {
         }).then((docResult)=>{
           console.log(docResult,'docresult')
           docResult.save(`pedidos.pdf`);
+         pedidos.style.fontSize = tamañoOriginal;
+
           if(_callback){
             _callback();
           }

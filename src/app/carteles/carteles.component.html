@@ -12,12 +12,16 @@
         <div class="col-5">
             <input class="form-control" id="textoModel" type="text" disabled [value]="fechaElegida">
         </div>
+
+        <div class="col-auto">
+            <button class="btn btn-primary" (click)="Imprimir()">Imprimir</button>
+        </div>
     
 </div>
 
-<div *ngIf="clientesAMostrar.length != 0">
-<div style="display:inline-block" class="text-center" *ngFor="let c of clientesAMostrar" >
-    <div class="mx-auto" style="border-width: 4px;border-style: solid;border-color:black; padding: 15px;">
+<div id="carteles" *ngIf="clientesAMostrar.length != 0">
+<div class="text-center" style="margin-bottom: 10px;" *ngFor="let c of clientesAMostrar" >
+    <div class="mx-auto" style="width: 50% !important;border-width: 4px;border-style: solid;border-color:black; padding: 15px; margin-left:25% !important;">
         <h2>{{c.cliente}}</h2><br>
         <h4>{{c.direccion}}</h4><br>
         <h2>{{c.zona}}</h2>
@@ -26,5 +30,7 @@
 </div>
 
 <div class = "text-center" *ngIf="clientesAMostrar.length == 0">
-    <h4>No hay clientes para esta fecha</h4>
+    <h4 *ngIf="flag == 0">Seleccione una fecha para visualizar los carteles</h4>
+    <h4 *ngIf="flag == 1">No hay clientes para esta fecha</h4>
+
 </div>
