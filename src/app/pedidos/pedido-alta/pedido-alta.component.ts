@@ -172,6 +172,7 @@ export class PedidoAltaComponent implements OnInit {
   }
   else{
     console.log(this.pedido)
+    this.pedido.zona = this.zonaElegida;
     this.produccionSvc.Eliminar(this.pedido.id);
     this.pedidosSvc.SetByid(this.pedido).then(()=>{
       this.productosElegidos.forEach(e => {
