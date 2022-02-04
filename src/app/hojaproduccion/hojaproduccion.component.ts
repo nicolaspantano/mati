@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDateStruct, NgbCalendar, NgbDatepickerI18n} from '@ng-bootstrap/ng-bootstrap';
 import jsPDF from 'jspdf';
 import { HojaProduccionService } from '../hoja-produccion.service';
 import html2canvas from 'html2canvas';
+import { CustomDatepickerI18nService, I18n } from 'src/app/servicios/ngbpicker.service';
+
 
 @Component({
   selector: 'app-hojaproduccion',
   templateUrl: './hojaproduccion.component.html',
-  styleUrls: ['./hojaproduccion.component.css']
+  styleUrls: ['./hojaproduccion.component.css'],
+  providers: [I18n,{provide: NgbDatepickerI18n, useClass: CustomDatepickerI18nService}]
 })
 export class HojaproduccionComponent implements OnInit {
 

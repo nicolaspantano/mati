@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateStruct, NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
 import { ClienteService } from '../servicios/cliente.service';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { PedidosService } from '../servicios/pedidos.service';
+import { CustomDatepickerI18nService, I18n } from 'src/app/servicios/ngbpicker.service';
 
 @Component({
   selector: 'app-carteles',
   templateUrl: './carteles.component.html',
-  styleUrls: ['./carteles.component.css']
+  styleUrls: ['./carteles.component.css'],
+  providers: [I18n,{provide: NgbDatepickerI18n, useClass: CustomDatepickerI18nService}]
 })
 export class CartelesComponent implements OnInit {
 

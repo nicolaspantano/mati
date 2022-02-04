@@ -4,14 +4,16 @@ import { ZonasService } from 'src/app/servicios/zonas.service';
 import dateFormat, { masks } from 'dateformat';
 import Swal from 'sweetalert2';
 import { HojaProduccionService } from 'src/app/hoja-produccion.service';
-import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateStruct,NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { CustomDatepickerI18nService, I18n } from 'src/app/servicios/ngbpicker.service';
 
 @Component({
   selector: 'app-pedidos-listado',
   templateUrl: './pedidos-listado.component.html',
-  styleUrls: ['./pedidos-listado.component.css']
+  styleUrls: ['./pedidos-listado.component.css'],
+  providers: [I18n,{provide: NgbDatepickerI18n, useClass: CustomDatepickerI18nService}]
 })
 export class PedidosListadoComponent implements OnInit {
 
@@ -172,6 +174,7 @@ export class PedidosListadoComponent implements OnInit {
     })*/
     console.log('cambio el calendario');
     this.fechaElegida = this.model.day + '/' + this.model.month + '/' + this.model.year;
+    console.log(this.fechaElegida)
     this.pedidosActual = [];
     this.pedidos.forEach(element => {
 
